@@ -1,0 +1,73 @@
+body{
+    background-color: rgb(34, 99, 107);
+}
+
+.LoginForm{
+
+    background: rgb(230, 230, 250,0.6);
+    width: 260px;
+    height: auto;
+    margin: 70px auto 50px auto;
+    padding: 30px 40px 20px 40px;
+    position: relative;
+    border: 1px solid black;
+    text-align: center;
+    border-radius: 25px;
+    animation: glow 1s infinite alternate;
+}
+.LoginForm h1{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin-bottom: 10px;
+}
+.Input{
+    margin-bottom: 10px;
+    height: 20px;
+    border-radius: 8px;
+}
+textarea:focus, input:focus{
+    outline: none;
+}
+.submit{
+    display: block;
+    border: none;
+    height: 30px;
+    width: 90px;
+    background-color: #00ffef;
+    margin: 10px auto;
+    border-radius: 10px;
+}
+@keyframes glow {
+    from {
+    box-shadow: 0 0 10px -10px #00ffef;
+    }
+    to {
+    box-shadow: 0 0 10px 10px #00ffef;
+    }
+}
+
+#errorMessage {
+    color: red;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+    display: none;
+}
+
+.alternativeActions{
+    display: inline-block;
+    margin-top: 30px;
+    width: 100%;
+}
+.alternativeActions button{
+    border: none;
+    height: 30px;
+    width: 115px;
+    border-radius: 10px;
+}
+.createAcc{
+    float: left;
+    margin-left: -10px;
+}
+.recoverAcc{
+    float: right;
+    margin-right: -10px;
+}

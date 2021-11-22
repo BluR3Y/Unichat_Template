@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>UniChat | Sign Up</title>
+    <link rel="icon" href="https://upload.wikimedia.org/wikipedia/en/f/f4/Ridetl.png">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        body{
+            background-color: black;
+        }
+        .main{
+            display: block;
+            margin: 150px auto;
+            width: 75%;
+            height: 250px;
+            border-radius: 30px;
+            border: 1px solid blue;
+        }
+        .main h1{
+            text-align: center;
+            user-select: none;
+            color: blue;
+        }
+        #userName{
+            font-size: 45px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        #instructions{
+            font-size: 25px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 20px;
+        }
+    </style>
+    <script>
+        var url = new URL(window.location.href);
+        var userName = url.searchParams.get('userName');
+    </script>
+</head>
+<body>
+    <div class="main">
+        <h1 id="userName"><script>document.getElementById('userName').textContent = userName;</script></h1>
+        <h1 id="instructions">Your account has been created, please check your email for an activation link</h1>
+    </div>
+</body>
+</html>

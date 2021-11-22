@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Unichat | Home</title>
+        <link rel="stylesheet" href="home.css">
+        <script src="../navigation.js"></script>
+
+        <!-- fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <div class="pageHeader">
+            <div class="siteLogo"><h1>UniChat</h1></div>
+            <div class="signOutCont"><button onclick="logout()">Sign Out</button></div>
+        </div>
+        <div class="pageContent">
+            <div class="sideNav showSideNav">
+                <div class="userProfile">
+                    <div class="userImgCont">
+                        <img>
+                    </div>
+                    <div class="userInfo">
+                        <h1></h1>
+                        <h2></h2>
+                    </div>
+                    <div class="userEditInfo">
+                        <a href="../userSettings/userSettings.html"><h1>&#9881;</h1></a>
+                    </div>
+                </div>
+                <div class="groupCont">
+                    <div class="groupFilterSection">
+                        <div class="groupFilterCont">
+                            <div class="groupBanner">
+                                <h1>Groups</h1>
+                            </div>
+                            <div class="groupFilters">
+                                <button class="groupFilterItem selectedGroupFilter" onclick="setGroupFilter(0)">All</button>
+                                <button class="groupFilterItem" onclick="setGroupFilter(1)">Favorite</button>
+                                <button class="groupFilterItem" onclick="setGroupFilter(2)">Created</button>
+                            </div>
+                            <div class="addGroupCont">
+                                <button>+</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="groupFilterDivider"></div>
+                    <div class="userGroups">
+                        <!-- <div class="userGroupItem" onmouseenter="groupHiddenInfoShow(this.getBoundingClientRect())" onmouseleave="groupHiddenInfoHide()">
+                            <div class="groupImgCont">
+                                <img src="https://iso.500px.com/wp-content/uploads/2016/03/stock-photo-142984111.jpg">
+                            </div>
+                            <div class="groupInfo">
+                                <h1 class="groupName">Test Group</h1>
+                                <div class="groupStats">
+                                    <h1 class="groupMembers">Members: <span>100</span></h1>
+                                    <h1 class="groupOnlineMembers">Online: <span>402</span></h1>
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+                    <div class="groupHiddenCont">
+                        <div class="groupHiddenPointer"></div>
+                        <div class="groupHiddenInfo">
+                            <h1 class="groupNameHidden">Hello</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="homeContent">
+                <div class="homeHeader">
+                    <div class="defaultHeader">
+                        <div class="friendsFilterCont">
+                            <div class="friendsFilterBanner">
+                                <h1>Friends</h1>
+                            </div>
+                            <div class="friendsFilterDivider"></div>
+                            <div class="friendFilters">
+                                <div class="friendFilterItem selectedFriendFilter" onclick="setFriendFilter(0)"><h1>All</h1></div>
+                                <div class="friendFilterItem" onclick="setFriendFilter(1)"><h1>Online</h1></div>
+                                <div class="friendFilterItem addFriendBtn"><h1>Add</h1></div>
+                            </div>
+                            <div class="friendsFilterDivider"></div>
+                            <div class="userFriendsCont" onmousewheel="scrollFriendList(event.deltaY)">
+                                <!-- <div class="userFriendItem">
+                                    <div class="friendImgCont">
+                                        <img src="https://media.istockphoto.com/photos/silhouette-of-man-in-dark-place-anonymous-backlit-contour-a-picture-id1139459625?b=1&k=20&m=1139459625&s=170667a&w=0&h=zVpBlAmdwUDWIVf0Zxtb3idMCitol4nzII2qde8Ybag=">
+                                    </div>
+                                    <div class="friendNameCont">
+                                        <h1>Rey F</h1>
+                                    </div>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mainDisplay">
+
+                </div>
+            </div>
+        </div>
+        <div class="addGroupForm">
+            <form class="createGroupCont">
+                <h1 class="createGroupFormText">Create Group</h1>
+
+                
+            </form>
+            <div class="groupSelectionCont">
+                <div class="createGroupBtn" onclick="createGroupForm()">
+                    <div class="groupSelectionInfo">
+                        <h1>Create a Group</h1>
+                        <h2>Create a new group where you can chat and exchange ideas on projects, ideas, and even memes.</h2>
+                    </div>
+                    <div class="groupArrowCont">
+                        <img src="https://cdn-icons-png.flaticon.com/512/556/556752.png">
+                    </div>
+                </div>
+                <div class="joinGroupBtn">
+                    <div class="groupArrowCont">
+                        <img src="https://cdn-icons-png.flaticon.com/512/556/556752.png" style="transform:rotate(180deg);">
+                    </div>
+                    <div class="groupSelectionInfo">
+                        <h1>Join a Group</h1>
+                        <h2>Join an existing group. Good for people that don't want the pressure that comes with being an admin.</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="joinGroupCont">
+
+            </div>
+        </div>
+    </body>
+    <script src="home.js"></script>
+</html>

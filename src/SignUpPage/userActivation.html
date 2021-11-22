@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>UniChat | Activation</title>
+    <link rel="icon" href="https://upload.wikimedia.org/wikipedia/en/f/f4/Ridetl.png">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        body{
+            background-color: black;
+        }
+        .container{
+            display: block;
+            margin: 100px auto;
+            width: 80%;
+            height: 200px;
+            border-radius: 30px;
+            border: 1px solid red;
+        }
+        .container button{
+            display: block;
+            position: fixed;
+            width: 200px;
+            height: 50px;
+            border-radius: 30px;
+            background-color: black;
+            border: 1px solid red;
+            color: red;
+            margin: auto;
+            top: 275px;
+            left: 50%;
+            transform: translate(-50%);
+        }
+        .container button:hover{
+            border: none;
+            background-color: red;
+            color: black;
+        }
+        .container div{
+            display: none;
+        }
+        .container h1{
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            text-align: center;
+            color: red;
+            font-size: 30px;
+            margin: 10px;
+        }
+        
+    </style>
+    <script>
+        var url = new URL(window.location.href);
+        var status = url.searchParams.get('status');
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div id="success">
+            <h1>Your account has successfully been activated.</h1>
+            <script>if(parseInt(status) === 1){document.getElementById('success').style.display = "block";}</script>
+        </div>
+        <div id='err1'>
+            <h1>The activation code is invalid.</h1>
+            <script>if(parseInt(status) === 2){document.getElementById('err1').style.display = "block";}</script>
+        </div>
+        <div id="err2">
+            <h1>Your account has already been activated.</h1>
+            <script>if(parseInt(status) === 3){document.getElementById('err2').style.display = "block";}</script>
+        </div>
+        <div id="err3">
+            <h1>Some values are missing from the activation link.</h1>
+            <script>if(parseInt(status) === 4){document.getElementById('err3').style.display = "block";}</script>
+        </div>
+        <div id="err4">
+            <h1>Failed to connect to Database. Please try again later.</h1>
+            <script>if(parseInt(status) === 5){document.getElementById('err4').style.display = "block";}</script>
+        </div>
+        <button onclick="window.location.href='/LoginPage/login.html'">Log In</button>
+    </div>
+</body>
+</html>

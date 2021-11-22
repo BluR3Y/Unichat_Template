@@ -1,0 +1,74 @@
+body{
+    background-color: rgb(134, 21, 21);
+}
+
+#createForm
+{
+	width: max-content;
+	background: rgb(230, 230, 250,0.6);
+	margin: 60px auto;
+	padding: 40px 40px 10px 40px;
+	position: relative;
+	border: 1px solid black;
+	text-align: center;
+	border-radius: 25px;
+    animation: glow 1s infinite alternate;
+}
+@keyframes glow {
+    from {
+      box-shadow: 0 0 10px -10px #FF3131;
+    }
+    to {
+      box-shadow: 0 0 10px 10px #FF3131;
+    }
+}
+#createForm h1{
+	font-size: 24px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+#createForm div{
+	margin: 30px;
+}
+#createForm input{
+    margin: 5px 40px 5px 40px;
+    height: 20px;
+    width: 200px;
+    border-radius: 8px;
+}
+textarea:focus, input:focus{
+    outline: none;
+}
+
+.submit
+{
+	position: relative;
+    background-color:#FF3131;
+    border: none;
+    color: white;
+    padding: 10px 25px;
+    display: inline-block;
+    border-radius: 15px;
+    width: 150px;
+	margin: 10px auto;
+}
+.submit:hover
+{
+    background-color: white;
+    border: 2px solid #c70f0f;
+    color: black;
+
+    transition: 0.4s;
+}
+
+.errorMsg{
+	color: #d00000;
+	font-size: 15px;
+	margin-top: -1px;
+	user-select: none;
+    display: block;
+    opacity: 0;
+    height: 15px;
+}
+.errorMsg p{
+    display: inline-block;
+}

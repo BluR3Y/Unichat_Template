@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>UniChat | Sign Up</title>
+    <link rel="icon" href="https://upload.wikimedia.org/wikipedia/en/f/f4/Ridetl.png">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="signup.css">
+</head>
+<body>
+
+    <form id="createForm">
+        <div>
+            <h1>Create a username:</h1>
+            <input type="text" placeholder="Enter username" name="username" required>
+            <p class="errorMsg"></p>
+        </div>
+        <div>
+            <h1>Enter your Email:</h1>
+            <input type="text" placeholder="Enter Email" name="email" required>
+            <p class="errorMsg"></p>
+        </div>
+        <div>
+            <h1>Create your password:</h1>
+            <input type="password" placeholder="Enter password" name="pword" required><br>
+            <p class="errorMsg"></p>
+            <p class="errorMsg"></p>
+        </div>
+        <button type="submit" class="submit" name="createUser">Submit</button>
+    </form>
+    </body>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="signup.js"></script>
+</html>
