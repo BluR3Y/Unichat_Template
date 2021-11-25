@@ -204,6 +204,28 @@ function signupUser(req,res){
     }
   })
 }
+
+function createUserGroup(req,res){
+  var user_id = req.body.user_id;
+  var group_name = req.body.group_name;
+
+  connection.query(`INSERT INTO user_groups (group_creator, group_name) VALUES(${user_id}, '${group_name}');`, function(err){
+    if(err){
+      res.json({status: "failed", reason: err});
+    }else{
+      connection.query("SELECT LAST_INSERT_ID();", function(err, result){
+        if(err){
+          res.json({status: "failed", reason: err});
+        }else{
+         let groupId = Object.values(result[0])[0];
+         res.json({status: "success", group_id: groupId});
+        }
+      });
+    }
+  })
+}
+
+// SELECT LAST_INSERT_ID(); -- This will get you back the PRIMARY KEY value of the last row that you inserted:
   
   function getUserImg(user_id){
     var file = glob.sync(__dirname+`/src/uploads/userProfiles/user-${user_id}.*`);
@@ -588,6 +610,7 @@ function getUserInfo(user_id, callback){
       }
     })
   });
+  
 
   app.post('/loginUser',postData.none() ,function(req,res){
     verifyLogin(req,res);
@@ -653,6 +676,10 @@ function getUserInfo(user_id, callback){
         }
       })
     }
+  });
+
+  app.post('/createUserGroup', postData.none(), function(req,res){
+    createUserGroup(req,res);
   });
 
   app.post('/getUserFriends', postData.none(), function(req,res){

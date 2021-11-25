@@ -13,6 +13,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
     </head>
     <body>
+        <div class="pageDimmer"></div>
         <div class="pageHeader">
             <div class="siteLogo"><h1>UniChat</h1></div>
             <div class="signOutCont"><button onclick="logout()">Sign Out</button></div>
@@ -42,16 +43,22 @@
                                 <button class="groupFilterItem" onclick="setGroupFilter(1)">Favorite</button>
                                 <button class="groupFilterItem" onclick="setGroupFilter(2)">Created</button>
                             </div>
-                            <div class="addGroupCont">
+                            <div class="addGroupCont" onclick="openAddGroupForm()">
                                 <button>+</button>
                             </div>
                         </div>
                     </div>
                     <div class="groupFilterDivider"></div>
                     <div class="userGroups">
-                        <!-- <div class="userGroupItem" onmouseenter="groupHiddenInfoShow(this.getBoundingClientRect())" onmouseleave="groupHiddenInfoHide()">
+                        <!-- <div class="userGroupItem">
                             <div class="groupImgCont">
                                 <img src="https://iso.500px.com/wp-content/uploads/2016/03/stock-photo-142984111.jpg">
+                                <div class="groupHiddenCont">
+                                    <div class="groupHiddenPointer"></div>
+                                    <div class="groupHiddenInfo">
+                                        <h1 class="groupNameHidden">Hello</h1>
+                                    </div>
+                                </div>
                             </div>
                             <div class="groupInfo">
                                 <h1 class="groupName">Test Group</h1>
@@ -61,12 +68,6 @@
                                 </div>
                             </div>
                         </div> -->
-                    </div>
-                    <div class="groupHiddenCont">
-                        <div class="groupHiddenPointer"></div>
-                        <div class="groupHiddenInfo">
-                            <h1 class="groupNameHidden">Hello</h1>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -98,15 +99,35 @@
                     </div>
                 </div>
                 <div class="mainDisplay">
+                    <div class="defaultMainDisplay">
 
+                    </div>
+                    <div class="directMessageDisplay">
+                        <div class="directMessages">
+                            <div class="messageItem">
+
+                            </div>
+                        </div>
+                        <div class="inputContDM">
+                            <form class="inputTextDM" onsubmit="createDirectMessage(event)">
+                                <input type="text" name="inputTextDM">
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="addGroupForm">
             <form class="createGroupCont">
                 <h1 class="createGroupFormText">Create Group</h1>
-
-                
+                <div class="addGroupInfo">
+                    <h1>Group Name:</h1>
+                    <input type="text" name="createGroup_name">
+                </div>
+                <div class="addGroupBtnCont">
+                    <button type="button" class="addGroupCreateBtn" name="create" onclick="createUserGroup()">Create</button>
+                    <button type="button" class="addGroupCancelBtn" name="cancel" onclick="closeAddGroupForm()">Cancel</button>
+                </div>
             </form>
             <div class="groupSelectionCont">
                 <div class="createGroupBtn" onclick="createGroupForm()">

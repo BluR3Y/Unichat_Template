@@ -33,14 +33,32 @@ function createGroupItem(groupData){
 
     let groupItem = document.createElement("div");
     groupItem.setAttribute("class","userGroupItem");
-    groupItem.setAttribute("onmouseenter","groupHiddenInfoShow(this.getBoundingClientRect())");
-    groupItem.setAttribute("onmouseleave","groupHiddenInfoHide()");
+    groupItem.setAttribute("onmouseenter","hiddenGroupInfoShow(this)");
+    groupItem.setAttribute("onmouseleave","hiddenGroupInfoHide(this)");
+    
 
     let groupImgCont = document.createElement("div");
     groupImgCont.setAttribute("class","groupImgCont");
     let groupImgObj = document.createElement("img");
     groupImgObj.setAttribute("src",`../uploads/${groupImg}`);
     groupImgCont.appendChild(groupImgObj);
+
+    let groupHiddenCont = document.createElement("div");
+    groupHiddenCont.setAttribute("class", "groupHiddenCont");
+    let hiddenPointer = document.createElement("div");
+    hiddenPointer.setAttribute("class","groupHiddenPointer");
+    groupHiddenCont.appendChild(hiddenPointer);
+    let hiddenInfo = document.createElement("div");
+    hiddenInfo.setAttribute("class","groupHiddenInfo");
+    let hiddenInfo_name = document.createElement("h1");
+    hiddenInfo_name.setAttribute("class","groupNameHidden");
+    let hiddenNameText = document.createTextNode(groupName);
+    hiddenInfo_name.appendChild(hiddenNameText);
+    hiddenInfo.appendChild(hiddenInfo_name);
+    groupHiddenCont.appendChild(hiddenInfo);
+    groupImgCont.appendChild(groupHiddenCont);
+
+
     groupItem.appendChild(groupImgCont);
 
     let groupInfo = document.createElement("div");
@@ -78,20 +96,24 @@ function createGroupItem(groupData){
     groupCont.appendChild(groupItem);
 }
 
-function groupHiddenInfoShow(elementInfo){
+function hiddenGroupInfoShow(el){
     let sideNav = document.getElementsByClassName("sideNav")[0];
+    let elHiddenCont = el.getElementsByClassName("groupHiddenCont")[0];
+    let elPosition = el.getBoundingClientRect();
+    let position_Y = elPosition.y;
+
     if(!sideNav.classList.contains("showSideNav")){
-        let hiddenCont = document.getElementsByClassName("groupHiddenCont")[0];
-        hiddenCont.style.top = `${elementInfo.top - 120}px`;
-        hiddenCont.style.display = "flex";
+        elHiddenCont.style.top = `${position_Y - 120}px`;
+        elHiddenCont.style.display = "flex";
     }
 }
-function groupHiddenInfoHide(){
+
+function hiddenGroupInfoHide(el){
+    let elHiddenCont = el.getElementsByClassName("groupHiddenCont")[0];
     let sideNav = document.getElementsByClassName("sideNav")[0];
 
     if(!sideNav.classList.contains("showSideNav")){
-        let hiddenCont = document.getElementsByClassName("groupHiddenCont")[0];
-        hiddenCont.style.display = "none";
+        elHiddenCont.style.display = "none";
     }
 }
 
@@ -107,6 +129,8 @@ function createFriendItem(friendData){
 
     let friendItem = document.createElement("div");
     friendItem.setAttribute("class","userFriendItem");
+
+    friendItem.setAttribute("onclick","openDirectMessage()");
 
     let friendImgCont = document.createElement("div");
     friendImgCont.setAttribute("class","friendImgCont");
@@ -134,6 +158,26 @@ function scrollFriendList(scrollDirection){
         friendList.scrollLeft -= 30;
     }
 }
+
+// const testObject = {
+//     disabled : false,
+//     hiddenInfo : (function(val){
+//         if(!this.disabled){
+//             printVal(val);
+//         }
+//     })
+// };
+
+// function printVal(val){
+//     console.log(val);
+// }
+
+// testObject.hiddenInfo(4);
+// testObject.disabled = true;
+// testObject.hiddenInfo(6);
+// testObject.disabled = false;
+// testObject.hiddenInfo(9);
+
 
 function getUserGroups(){
     var selectedFilter = (()=>{
@@ -226,6 +270,25 @@ function clearUserFriends(){
     })
 }
 
+function dimPage(objectCaller){
+    let pageDimmer = document.getElementsByClassName("pageDimmer")[0];
+
+    pageDimmer.style.display = "block";
+    pageDimmer.setAttribute("onclick",`dimmerClicked('${objectCaller}')`);
+}
+function undimPage(){
+    let pageDimmer = document.getElementsByClassName("pageDimmer")[0];
+
+    pageDimmer.style.display = "none";
+    pageDimmer.removeAttribute("onclick");
+}
+
+function dimmerClicked(objectCaller){
+    if(objectCaller === "addGroupForm"){
+        closeAddGroupForm();
+    }
+}
+
 function setGroupFilter(index){
     var groupFilters = document.getElementsByClassName('groupFilterItem');
     for(var i=0; i < groupFilters.length; i++){
@@ -255,6 +318,27 @@ document.getElementsByClassName("userFriendsCont")[0].onload = (()=>{
     getUserFriends();
 })();
 
+function openAddGroupForm(){
+    let form = document.getElementsByClassName("addGroupForm")[0];
+    form.style.display = "flex";
+    dimPage("addGroupForm");
+}
+function closeAddGroupForm(){
+    let form = document.getElementsByClassName("addGroupForm")[0];
+    form.style.display = "none";
+
+    let createForm = document.getElementsByClassName("createGroupCont")[0];
+    let selectionForm = document.getElementsByClassName("groupSelectionCont")[0];
+
+    if(selectionForm.style.width !== "100%"){
+        selectionForm.style.width = "100%";
+    }
+    if(createForm.style.width !== "0"){
+        createForm.style.width = "0";
+    }
+
+    undimPage();
+}
 
 function createGroupForm(){
     let createForm = document.getElementsByClassName("createGroupCont")[0];
@@ -267,9 +351,57 @@ function createGroupForm(){
     createForm.style.transition = "width 1s ease";
 }
 
-function joinGroupForm(){
-    
+function createUserGroup()
+{
+    let createForm = document.getElementsByClassName("createGroupCont")[0];
+    let groupName = createForm.elements["createGroup_name"].value;
+
+    if(groupName !== ""){
+        let createGroup_data = new FormData();
+        let createGroup_xhr = new XMLHttpRequest();
+
+        createGroup_data.append("user_id", localStorage.getItem("user_id"));
+        createGroup_data.append("group_name", groupName);
+
+        createGroup_xhr.open("POST",'/createUserGroup',true);
+        createGroup_xhr.onreadystatechange = function(){
+            if(createGroup_xhr,this.readyState === 4){
+                if(createGroup_xhr.status === 200){
+                    var response = JSON.parse(createGroup_xhr.responseText);
+                    // console.log(response.status, response.reason);
+                    if(response.status === "success"){
+                        createGroupItem(1,1,1,1);
+                    }
+                }
+            }
+        }
+        createGroup_xhr.send(createGroup_data);
+
+        closeAddGroupForm();
+    }else{
+        console.log("empty");
+    }
 }
+
+function openDirectMessage(){
+    
+    let defaultDisplay = document.getElementsByClassName("defaultMainDisplay")[0];
+    let directMessage = document.getElementsByClassName("directMessageDisplay")[0];
+
+    defaultDisplay.style.display = "none";
+    directMessage.style.display = "block";
+
+    showSideNav();
+}
+
+function createDirectMessage(event){
+    event.preventDefault();
+
+    let inputElem = event.target.elements["inputTextDM"];
+
+    console.log(inputElem.value);
+}
+
 
 
 // for(var i=0; i < 15; i++){
